@@ -47,6 +47,10 @@ public class Media {
         this.cost = cost;
     }
 
+    public boolean isMatch(String title) {
+        return getTitle() != null && getTitle().equalsIgnoreCase(title);
+    }
+
     @Override
     public String toString() {
         return "Media{" +
