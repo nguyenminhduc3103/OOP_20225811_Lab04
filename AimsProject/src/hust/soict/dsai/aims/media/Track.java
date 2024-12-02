@@ -1,7 +1,6 @@
 package AimsProject.src.hust.soict.dsai.aims.media;
 
-
-public class Track {
+public class Track implements Playable {
     private String title;
     private int length;
 
@@ -19,6 +18,12 @@ public class Track {
     }
 
     @Override
+    public void play() {
+        System.out.println("Playing Track: " + this.title);
+        System.out.println("Track length: " + this.length + " mins");
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj instanceof Track) {
             Track otherTrack = (Track) obj;
@@ -31,7 +36,7 @@ public class Track {
     public String toString() {
         return "Track{" +
                 "title='" + title + '\'' +
-                ", length=" + length + " mins" +
+                ", length=" + length +
                 '}';
     }
 }
