@@ -1,7 +1,7 @@
 package AimsProject.src.hust.soict.dsai.test.disc;
  // Wrapper class to hold a DigitalVideoDisc
 
-import AimsProject.src.hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import AimsProject.src.hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 class DigitalVideoDiscWrapper {
     DigitalVideoDisc dvd;

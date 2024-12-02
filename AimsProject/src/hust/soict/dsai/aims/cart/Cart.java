@@ -2,7 +2,7 @@ package AimsProject.src.hust.soict.dsai.aims.cart;
 import java.util.ArrayList;
 import java.util.List;
 
-import AimsProject.src.hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import AimsProject.src.hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class Cart {
     private List<DigitalVideoDisc> items = new ArrayList<>();

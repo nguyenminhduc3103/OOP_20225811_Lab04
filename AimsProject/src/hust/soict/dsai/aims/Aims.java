@@ -1,13 +1,13 @@
 package AimsProject.src.hust.soict.dsai.aims;
 import AimsProject.src.hust.soict.dsai.aims.cart.Cart;
-import AimsProject.src.hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import AimsProject.src.hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class Aims {
     public static void main(String[] args) {
         Cart cart = new Cart();
 
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("Comedy", "Me and You", 20);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Comedy", "You and Me", 31.128389);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Comedy", "You and Me", 31.122);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Me");
 
         DigitalVideoDisc[] dvds = {dvd1, dvd2, dvd3};
