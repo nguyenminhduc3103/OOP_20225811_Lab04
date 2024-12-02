@@ -1,75 +1,50 @@
 package AimsProject.src.hust.soict.dsai.aims.media;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Book {
-    private int bookId;
-    private String bookTitle;
-    private String bookCategory;
-    private float bookCost;
-    private ArrayList<String> bookAuthors;
+public class Book extends Media {
+    private List<String> authors;
 
-    // Constructor
-    public Book(int bookId, String bookTitle, String bookCategory, float bookCost) {
-        this.bookId = bookId;
-        this.bookTitle = bookTitle;
-        this.bookCategory = bookCategory;
-        this.bookCost = bookCost;
-        this.bookAuthors = new ArrayList<>();
+    // Default constructor
+    public Book() {
+        super();
+        this.authors = new ArrayList<>();
     }
 
-    // Getters and setters
-    public int getBookId() {
-        return bookId;
+    public Book(int id, String title, String category, float cost, List<String> authors) {
+        super(id, title, category, cost); // Call the superclass (Media) constructor
+        this.authors = (authors != null) ? authors : new ArrayList<>();
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public List<String> getAuthors() {
+        return authors;
     }
 
-    public String getBookTitle() {
-        return bookTitle;
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
     }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    public String getBookCategory() {
-        return bookCategory;
-    }
-
-    public void setBookCategory(String bookCategory) {
-        this.bookCategory = bookCategory;
-    }
-
-    public float getBookCost() {
-        return bookCost;
-    }
-
-    public void setBookCost(float bookCost) {
-        this.bookCost = bookCost;
-    }
-
-    public ArrayList<String> getBookAuthors() {
-        return bookAuthors;
-    }
-
-    // Methods for managing authors
-    public void addBookAuthor(String authorName) {
-        if (!bookAuthors.contains(authorName)) {
-            bookAuthors.add(authorName);
-            System.out.println("Author added: " + authorName);
+    public void addAuthor(String author) {
+        if (author != null && !author.isEmpty() && !this.authors.contains(author)) {
+            this.authors.add(author);
+            System.out.println("Author added: " + author);
         } else {
-            System.out.println("Author already exists: " + authorName);
+            System.out.println("Author is either null, empty, or already exists.");
         }
     }
 
-    public void removeBookAuthor(String authorName) {
-        if (bookAuthors.contains(authorName)) {
-            bookAuthors.remove(authorName);
-            System.out.println("Author removed: " + authorName);
+    public void removeAuthor(String author) {
+        if (this.authors.contains(author)) {
+            this.authors.remove(author);
+            System.out.println("Author removed: " + author);
         } else {
-            System.out.println("Author not found: " + authorName);
+            System.out.println("Author not found: " + author);
         }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Book{" + "authors=" + authors + '}';
     }
 }
+
