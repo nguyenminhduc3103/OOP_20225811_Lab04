@@ -11,9 +11,9 @@ public class Book extends Media {
         this.authors = new ArrayList<>();
     }
 
-    public Book(int id, String title, String category, float cost, List<String> authors) {
-        super(id, title, category, cost); // Call the superclass (Media) constructor
-        this.authors = (authors != null) ? authors : new ArrayList<>();
+    public Book(int id, String title, String category, double cost) {
+        super(id, title, category, cost);
+        this.authors = new ArrayList<>();
     }
 
     public List<String> getAuthors() {
