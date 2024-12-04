@@ -1,4 +1,5 @@
 package AimsProject.src.hust.soict.dsai.aims.media;
+import java.util.Comparator;
 
 public class Media {
     private int id;
@@ -71,4 +72,26 @@ public class Media {
                 ", '" + category + '\'' +
                 ", " + cost;
     }
+    
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new Comparator<Media>() {
+        @Override
+        public int compare(Media m1, Media m2) {
+            int titleComparison = m1.getTitle().compareToIgnoreCase(m2.getTitle());
+            if (titleComparison != 0) {
+                return titleComparison;
+            }
+            return Double.compare(m2.getCost(), m1.getCost());
+        }
+    };
+
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new Comparator<Media>() {
+        @Override
+        public int compare(Media m1, Media m2) {
+            int costComparison = Double.compare(m2.getCost(), m1.getCost());
+            if (costComparison != 0) {
+                return costComparison;
+            }
+            return m1.getTitle().compareToIgnoreCase(m2.getTitle());
+        }
+    };
 }
