@@ -1,5 +1,6 @@
 package AimsProject.src.hust.soict.dsai.aims.cart;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import AimsProject.src.hust.soict.dsai.aims.media.Media;
 
@@ -92,5 +93,17 @@ public class Cart {
         if (!found) {
             System.out.println("No items found with title: " + title);
         }
+    }
+
+    public void sortByTitleCost() {
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_TITLE_COST);
+        System.out.println("Cart sorted by Title (ascending) and Cost (descending):");
+        displayCartDetails(); 
+    }
+
+    public void sortByCostTitle() {
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
+        System.out.println("Cart sorted by Cost (descending) and Title (ascending):");
+        displayCartDetails();
     }
 }
