@@ -1,8 +1,12 @@
 package AimsProject.src.hust.soict.dsai.aims.cart;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
 import AimsProject.src.hust.soict.dsai.aims.media.Media;
+import AimsProject.src.hust.soict.dsai.aims.media.Playable;
 
 
 public class Cart {
@@ -82,17 +86,13 @@ public class Cart {
     }
 
     // Search by Media title
-    public void searchByTitle(String title) {
-        boolean found = false;
+    public Media searchByTitle(String title) {
         for (Media media : itemsOrdered) {
             if (media.isMatch(title)) {
-                System.out.println("Item found: " + media.toString());
-                found = true;
+                return media; 
             }
         }
-        if (!found) {
-            System.out.println("No items found with title: " + title);
-        }
+        return null; 
     }
 
     public void sortByTitleCost() {
@@ -105,5 +105,125 @@ public class Cart {
         Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
         System.out.println("Cart sorted by Cost (descending) and Title (ascending):");
         displayCartDetails();
+    }
+
+     public void filterMediaInCart(Scanner scanner) {
+        System.out.println("Filter by (1) ID or (2) Title:");
+        int filterChoice = scanner.nextInt();
+        scanner.nextLine();  
+        switch (filterChoice) {
+            case 1:
+                System.out.println("Enter the ID of the media:");
+                int id = scanner.nextInt();
+                scanner.nextLine();  
+                boolean found = false;
+                for (Media media : itemsOrdered) {
+                    if (media.getId() == id) {
+                        System.out.println(media);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    System.out.println("No media found with ID: " + id);
+                }
+                break;
+            case 2:
+                System.out.println("Enter the title of the media:");
+                String title = scanner.nextLine();
+                found = false;
+                for (Media media : itemsOrdered) {
+                    if (media.getTitle().equalsIgnoreCase(title)) {
+                        System.out.println(media);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    System.out.println("No media found with title: " + title);
+                }
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                break;
+        }
+    }
+
+    public void sortMediaInCart(Scanner scanner) {
+        System.out.println("Sort by (1) Title or (2) Cost:");
+        int sortChoice = scanner.nextInt();
+        scanner.nextLine(); 
+        switch (sortChoice) {
+            case 1:
+                itemsOrdered.sort(Comparator.comparing(Media::getTitle));
+                break;
+            case 2:
+                itemsOrdered.sort(Comparator.comparingDouble(Media::getCost));
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                return;
+        }
+        System.out.println("Sorted media in cart:");
+        for (Media media : itemsOrdered) {
+            System.out.println(media);
+        }
+    }
+
+    public void playMediaInCart(Scanner scanner) {
+        if (itemsOrdered.isEmpty()) {
+            System.out.println("The cart is currently empty.");
+            return;
+        }
+
+        System.out.println("Enter the title of the media to play:");
+        String title = scanner.nextLine();
+        Media foundMedia = itemsOrdered.stream()
+                                       .filter(media -> media.getTitle().equalsIgnoreCase(title))
+                                       .findFirst()
+                                       .orElse(null);
+
+        if (foundMedia != null && foundMedia instanceof Playable) {
+            ((Playable) foundMedia).play();
+        } else if (foundMedia != null) {
+            System.out.println("This media cannot be played.");
+        } else {
+            System.out.println("Media not found in the cart.");
+        }
+    }
+
+    
+    public void emptyCart() {
+        itemsOrdered.clear();
+        System.out.println("The cart has been emptied.");
+    }
+    
+    public void removeMediaByTitle(String title) {
+        Media mediaToRemove = null;
+        for (Media media : itemsOrdered) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                mediaToRemove = media;
+                break;
+            }
+        }
+        if (mediaToRemove != null) {
+            itemsOrdered.remove(mediaToRemove);
+            System.out.println(title + " has been removed from the cart.");
+        } else {
+            System.out.println(title + " not found in the cart.");
+        }
+    }
+
+    public void clearCart() {
+        itemsOrdered.clear();
+        System.out.println("The cart has been cleared.");
+    }
+    
+    public boolean isEmpty() {
+        return itemsOrdered.isEmpty();
+    }
+
+    public List<Media> getMediaList() {
+        return new ArrayList<>(itemsOrdered);
     }
 }

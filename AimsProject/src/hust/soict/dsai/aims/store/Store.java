@@ -2,6 +2,7 @@ package AimsProject.src.hust.soict.dsai.aims.store;
 
 import AimsProject.src.hust.soict.dsai.aims.media.Media;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Store {
     private ArrayList<Media> itemsInStore;
@@ -38,16 +39,18 @@ public class Store {
         }
     }
 
-    public void searchByTitle(String title) {
-        boolean found = false;
+    public Media searchByTitle(String title) {
         for (Media media : itemsInStore) {
             if (media.isMatch(title)) {
                 System.out.println("Found media: " + media.toString());
-                found = true;
+                return media; // Return the first matching media
             }
         }
-        if (!found) {
-            System.out.println("No media found with title: " + title);
-        }
+        System.out.println("No media found with title: " + title);
+        return null; // Return null if no media matches
+    }
+
+    public List<Media> getMediaList() {
+        return new ArrayList<>(itemsInStore);  // Return a copy of the list
     }
 }
