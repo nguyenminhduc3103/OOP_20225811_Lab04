@@ -14,6 +14,7 @@ public class StoreTest {
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin", "Animation", 18.99);
         Book book1 = new Book(1, "Harry Potter", "Fantasy", 29.99);
+        book1.addAuthor("Me");
 
         // Add Media to the store
         store.addMedia(dvd1);

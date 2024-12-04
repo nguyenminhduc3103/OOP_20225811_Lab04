@@ -65,11 +65,10 @@ public class Media {
 
     @Override
     public String toString() {
-        return "Media{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", category='" + category + '\'' +
-                ", cost=" + cost +
-                '}';
+        return 
+                " " + id +
+                ", '" + title + '\'' +
+                ", '" + category + '\'' +
+                ", " + cost;
     }
 }

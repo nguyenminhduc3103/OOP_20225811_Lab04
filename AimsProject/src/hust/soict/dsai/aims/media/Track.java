@@ -38,9 +38,8 @@ public class Track implements Playable {
 
     @Override
     public String toString() {
-        return "Track{" +
+        return "Track: " +
                 "title='" + title + '\'' +
-                ", length=" + length +
-                '}';
+                ", length=" + length;
     }
 }
