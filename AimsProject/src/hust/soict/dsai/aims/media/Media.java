@@ -52,6 +52,18 @@ public class Media {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; 
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false; 
+        }
+        Media otherMedia = (Media) obj; 
+        return this.title != null && this.title.equalsIgnoreCase(otherMedia.title); 
+    }
+
+    @Override
     public String toString() {
         return "Media{" +
                 "id=" + id +
