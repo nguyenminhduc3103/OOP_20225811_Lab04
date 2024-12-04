@@ -27,7 +27,7 @@ public class DigitalVideoDisc extends Disc implements Playable {
 
     @Override
     public String toString() {
-        return "DVD - " + super.toString();
+        return "DVD: " + super.toString();
     }
 
     public boolean isMatch(String title) {

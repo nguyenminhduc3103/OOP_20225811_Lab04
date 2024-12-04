@@ -32,6 +32,6 @@ public class Disc extends Media {
 
     @Override
     public String toString() {
-        return super.toString() + ", Director: " + director + ", Length: " + length + " mins";
+        return "" + super.toString() + ", " + director + ", " + length + " mins";
     }
 }
