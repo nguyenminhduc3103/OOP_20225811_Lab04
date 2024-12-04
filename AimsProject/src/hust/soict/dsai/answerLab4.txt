@@ -1,0 +1,53 @@
+1. Lớp nào nên implement interface Comparable?
+Lớp Media nên implement interface Comparable vì đây là lớp cha cho tất cả các loại media (ví dụ: Book, CompactDisc, DVD) và chứa các thuộc tính chung (title, cost) dùng để so sánh.
+
+2. Cách implement phương thức compareTo() như thế nào?
+Để implement phương thức compareTo() trong lớp Media:
+- Tiêu chí sắp xếp chính là title (theo thứ tự chữ cái).
+- Nếu hai item có cùng title, so sánh theo cost (giảm dần).
+
+Dưới đây là cách implement:
+
+@Override
+public int compareTo(Media other) {
+    // So sánh theo title
+    int titleComparison = this.title.compareToIgnoreCase(other.title);
+    if (titleComparison != 0) {
+        return titleComparison;
+    }
+
+    // Nếu title giống nhau, so sánh theo cost (giảm dần)
+    return Float.compare(other.cost, this.cost);
+}
+
+3. Chúng ta có thể có hai quy tắc sắp xếp (ví dụ: theo title rồi đến cost, hoặc theo cost rồi đến title) trong Comparable không?
+Không, interface Comparable chỉ cho phép một quy tắc sắp xếp tự nhiên được định nghĩa trong phương thức compareTo(). Để có nhiều quy tắc sắp xếp, chúng ta cần sử dụng interface Comparator để linh hoạt hơn.
+
+Ví dụ:
+- Media.COMPARE_BY_TITLE_COST để sắp xếp theo title rồi đến cost.
+- Media.COMPARE_BY_COST_TITLE để sắp xếp theo cost rồi đến title.
+
+Sử dụng Comparable sẽ khóa hành vi sắp xếp vào một quy tắc duy nhất.
+
+4. Làm thế nào để xử lý DVD với quy tắc sắp xếp khác biệt?
+Nếu DVD có quy tắc sắp xếp riêng (theo title, rồi đến độ dài giảm dần, sau đó đến cost), bạn có thể ghi đè phương thức compareTo() trong lớp DVD.
+
+5. Tóm tắt ưu điểm và nhược điểm:
+Comparable:
+    Ưu điểm:
+        Đơn giản, dễ sử dụng cho một tiêu chí sắp xếp.
+        Tích hợp sẵn vào đối tượng, không cần lớp ngoài để sắp xếp.
+        Hiệu suất tốt khi chỉ có một quy tắc sắp xếp.
+    Hạn chế:
+        Chỉ hỗ trợ một tiêu chí sắp xếp duy nhất.
+        Không linh hoạt, khó thay đổi quy tắc sắp xếp.
+        Phải thay đổi lớp đối tượng để thay đổi quy tắc sắp xếp.
+Comparator:
+    Ưu điểm:
+        Hỗ trợ nhiều tiêu chí sắp xếp linh hoạt.
+        Có thể thay đổi quy tắc sắp xếp mà không cần thay đổi lớp đối tượng.
+        Áp dụng được cho các lớp không thể sửa đổi.
+    Hạn chế:
+        Phức tạp hơn khi cần tạo nhiều lớp Comparator.
+        Tốn tài nguyên khi có nhiều quy tắc sắp xếp phức tạp.
+        Cần tạo đối tượng Comparator riêng cho mỗi quy tắc sắp xếp.
